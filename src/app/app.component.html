@@ -1,7 +1,7 @@
 App component
 
-<dx-chart [dataSource]="chartData">
-  <dxi-series argumentField="argument" valueField="value0" color="red"></dxi-series>
+<dx-chart [dataSource]="chartData" #chart>
+  <dxi-series argumentField="argument" valueField="value0" color="red" ></dxi-series>
   <dxi-series argumentField="argument" valueField="value1" color="black"></dxi-series>
   <dxi-series argumentField="argument" valueField="value2" color="black"></dxi-series>
   <dxi-series argumentField="argument" valueField="value3" color="black"></dxi-series>
@@ -13,6 +13,8 @@ App component
   <dxi-series argumentField="argument" valueField="value9" color="black"></dxi-series>
 </dx-chart>
 
+
+Slider - move red line
 <dx-slider #slider
            [min]="sliderMin"
            [max]="sliderMax"
@@ -25,3 +27,5 @@ App component
   [(value)]="slider.value"
   (onValueChanged)="onSliderValueChanged($event)"
 ></dx-number-box>
+<br><br>
+<dx-button (onClick)="onButtonClick($event)">Move Red Line (Not Working)</dx-button>

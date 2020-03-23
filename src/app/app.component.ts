@@ -1,4 +1,6 @@
-import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {DxiSeriesComponent} from 'devextreme-angular/ui/nested';
+import {DxChartComponent} from 'devextreme-angular';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +9,8 @@ import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 })
 
 export class AppComponent implements OnInit {
+  @ViewChild(DxChartComponent, {static: false}) chart: DxChartComponent;
+
   title = 'dx-chart-lines';
   chartData: IChartData[] = [];
   sliderValue = 0;
@@ -47,11 +51,11 @@ export class AppComponent implements OnInit {
     const delta = this.sliderValue - this.lastSliderValue;
     if (delta !== 0) {
       this.lastSliderValue = this.sliderValue;
-      this.moveLine1(delta);
+      this.moveLine0(delta);
     }
   }
 
-  moveLine1(delta: number): void {
+  moveLine0(delta: number): void {
     if (delta < 0) {
       for (let i = 0; i < (this.chartData.length + delta); i++) {
         this.chartData[i].value0 = this.chartData[i - delta].value0;
@@ -71,6 +75,33 @@ export class AppComponent implements OnInit {
     // need to update chartData reference to make dx-chart redraw
     this.chartData = [...this.chartData];
     this.cdRef.markForCheck();
+  }
+
+  onButtonClick($event: any) {
+    console.log('onButtonClick');
+
+    if (!this.chart) {
+      console.log('no chart');
+      return;
+    }
+    console.log(this.chart);
+
+    const chartSeries = this.chart.instance.getAllSeries();
+
+    if (chartSeries.length === 0) {
+      console.log('no first series');
+      return;
+    }
+
+    const moveSeries = chartSeries[0];
+
+    console.log(moveSeries);
+    const pointsCollection: any[] = moveSeries.getAllPoints();
+    console.log('pointsCollection ', pointsCollection);
+
+    pointsCollection.forEach(point => {
+      point.x = point.x - 100;
+    });
   }
 }
 

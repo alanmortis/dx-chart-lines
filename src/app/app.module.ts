@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import {DxChartModule, DxNumberBoxModule, DxSliderModule} from 'devextreme-angular';
+import {DxButtonModule, DxChartModule, DxNumberBoxModule, DxSliderModule} from 'devextreme-angular';
 
 @NgModule({
   declarations: [
@@ -12,7 +12,8 @@ import {DxChartModule, DxNumberBoxModule, DxSliderModule} from 'devextreme-angul
     BrowserModule,
     DxChartModule,
     DxSliderModule,
-    DxNumberBoxModule
+    DxNumberBoxModule,
+    DxButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
